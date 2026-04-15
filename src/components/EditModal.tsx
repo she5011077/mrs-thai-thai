@@ -164,7 +164,7 @@ export default function EditModal({ day, post, onClose, onSave, onCreate, onDele
                 rows={8}
                 placeholder="輸入文章內容..."
                 autoFocus
-                className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm text-gray-900 focus:ring-1 focus:ring-gray-900 focus:border-gray-900 resize-none leading-relaxed transition-colors"
+                className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm text-gray-900 focus:ring-1 focus:ring-[#683B92] focus:border-[#683B92] resize-none leading-relaxed transition-colors"
               />
               <div className="flex items-center justify-between mt-1.5">
                 <div className="text-[11px] text-gray-300">{content.length} / 500</div>
@@ -231,7 +231,7 @@ export default function EditModal({ day, post, onClose, onSave, onCreate, onDele
               value={link}
               onChange={(e) => setLink(e.target.value)}
               placeholder="https://..."
-              className="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm text-gray-900 focus:ring-1 focus:ring-gray-900 focus:border-gray-900 transition-colors"
+              className="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm text-gray-900 focus:ring-1 focus:ring-[#683B92] focus:border-[#683B92] transition-colors"
             />
           </div>
 
@@ -247,7 +247,7 @@ export default function EditModal({ day, post, onClose, onSave, onCreate, onDele
               onChange={(e) => setFeedback(e.target.value)}
               rows={3}
               placeholder="輸入修改建議或備註..."
-              className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm text-gray-900 focus:ring-1 focus:ring-gray-900 focus:border-gray-900 resize-none transition-colors"
+              className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm text-gray-900 focus:ring-1 focus:ring-[#683B92] focus:border-[#683B92] resize-none transition-colors"
             />
           </div>
         </div>
@@ -274,7 +274,7 @@ export default function EditModal({ day, post, onClose, onSave, onCreate, onDele
             <button
               onClick={handleSubmit}
               disabled={saving || !content.trim()}
-              className="px-6 py-2 bg-gray-900 text-white rounded-lg text-sm font-medium hover:bg-gray-800 disabled:opacity-50 transition-colors"
+              className="px-6 py-2 bg-[#683B92] text-white rounded-lg text-sm font-medium hover:bg-[#552f78] disabled:opacity-50 transition-colors"
             >
               {saving ? '處理中...' : isNew ? '新增' : '儲存'}
             </button>

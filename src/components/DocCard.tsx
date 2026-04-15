@@ -115,14 +115,14 @@ export default function DocCard({ label, settingKey, initialUrl }: DocCardProps)
                   onChange={(e) => setInput(e.target.value)}
                   placeholder="貼上 Google 文件連結..."
                   autoFocus
-                  className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm text-gray-900 focus:ring-1 focus:ring-gray-900 focus:border-gray-900 transition-colors mb-3"
+                  className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm text-gray-900 focus:ring-1 focus:ring-[#683B92] focus:border-[#683B92] transition-colors mb-3"
                   onKeyDown={(e) => e.key === 'Enter' && handleSave()}
                 />
                 <div className="flex flex-wrap gap-2">
                   <button
                     onClick={handleSave}
                     disabled={saving}
-                    className="px-4 py-1.5 bg-gray-900 text-white rounded-lg text-xs font-medium hover:bg-gray-800 disabled:opacity-50 transition-colors"
+                    className="px-4 py-1.5 bg-[#683B92] text-white rounded-lg text-xs font-medium hover:bg-[#552f78] disabled:opacity-50 transition-colors"
                   >
                     {saving ? '儲存中...' : '儲存'}
                   </button>

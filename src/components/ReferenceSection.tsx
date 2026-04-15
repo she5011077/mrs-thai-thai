@@ -80,7 +80,7 @@ export default function ReferenceSection({ initialRefs }: ReferenceSectionProps)
         <div />
         <button
           onClick={() => setShowAdd(!showAdd)}
-          className="px-4 py-2 bg-gray-900 text-white rounded-lg text-sm font-medium hover:bg-gray-800 transition-colors"
+          className="px-4 py-2 bg-[#683B92] text-white rounded-lg text-sm font-medium hover:bg-[#552f78] transition-colors"
         >
           {showAdd ? '取消' : '＋ 新增資料'}
         </button>
@@ -94,7 +94,7 @@ export default function ReferenceSection({ initialRefs }: ReferenceSectionProps)
             <button
               onClick={() => setAddType('link')}
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                addType === 'link' ? 'bg-gray-900 text-white' : 'bg-gray-50 text-gray-400 hover:bg-gray-100'
+                addType === 'link' ? 'bg-[#683B92] text-white' : 'bg-gray-50 text-gray-400 hover:bg-gray-100'
               }`}
             >
               網址連結
@@ -102,7 +102,7 @@ export default function ReferenceSection({ initialRefs }: ReferenceSectionProps)
             <button
               onClick={() => setAddType('file')}
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                addType === 'file' ? 'bg-gray-900 text-white' : 'bg-gray-50 text-gray-400 hover:bg-gray-100'
+                addType === 'file' ? 'bg-[#683B92] text-white' : 'bg-gray-50 text-gray-400 hover:bg-gray-100'
               }`}
             >
               上傳檔案
@@ -114,7 +114,7 @@ export default function ReferenceSection({ initialRefs }: ReferenceSectionProps)
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="名稱（例如：菜單參考、品牌色卡）"
-            className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm text-gray-900 focus:ring-1 focus:ring-gray-900 focus:border-gray-900 transition-colors"
+            className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm text-gray-900 focus:ring-1 focus:ring-[#683B92] focus:border-[#683B92] transition-colors"
           />
 
           {addType === 'link' ? (
@@ -124,13 +124,13 @@ export default function ReferenceSection({ initialRefs }: ReferenceSectionProps)
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
                 placeholder="https://..."
-                className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm text-gray-900 focus:ring-1 focus:ring-gray-900 focus:border-gray-900 transition-colors"
+                className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm text-gray-900 focus:ring-1 focus:ring-[#683B92] focus:border-[#683B92] transition-colors"
                 onKeyDown={(e) => e.key === 'Enter' && handleAddLink()}
               />
               <button
                 onClick={handleAddLink}
                 disabled={saving || !name.trim() || !url.trim()}
-                className="px-5 py-2 bg-gray-900 text-white rounded-lg text-sm font-medium hover:bg-gray-800 disabled:opacity-50 transition-colors"
+                className="px-5 py-2 bg-[#683B92] text-white rounded-lg text-sm font-medium hover:bg-[#552f78] disabled:opacity-50 transition-colors"
               >
                 {saving ? '儲存中...' : '新增'}
               </button>

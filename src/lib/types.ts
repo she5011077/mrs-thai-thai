@@ -40,6 +40,6 @@ export const STATUS_LABELS: Record<PostStatus, string> = {
 
 export const STATUS_STYLES: Record<PostStatus, { bg: string; text: string; border: string }> = {
   pending: { bg: 'bg-gray-100', text: 'text-gray-600', border: 'border-gray-300' },
-  approved: { bg: 'bg-gray-900', text: 'text-white', border: 'border-gray-900' },
-  revision: { bg: 'bg-red-500', text: 'text-white', border: 'border-red-500' },
+  approved: { bg: 'bg-[#683B92]', text: 'text-white', border: 'border-[#683B92]' },
+  revision: { bg: 'bg-[#EB6D54]', text: 'text-white', border: 'border-[#EB6D54]' },
 };

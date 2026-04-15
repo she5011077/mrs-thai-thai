@@ -37,7 +37,7 @@ export default function PostCard({ day, post, onClick }: PostCardProps) {
       }`}
     >
       <div className="flex items-center justify-between mb-2 sm:mb-3">
-        <span className="text-sm sm:text-base font-semibold text-gray-900 tracking-tight">
+        <span className="text-sm sm:text-base font-semibold text-[#683B92] tracking-tight">
           Day {day}
         </span>
         <span

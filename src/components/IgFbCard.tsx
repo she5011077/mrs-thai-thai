@@ -51,7 +51,7 @@ export default function IgFbCard({ num, post, onClick }: IgFbCardProps) {
       {/* Text area */}
       <div className="p-3 sm:p-4">
         <div className="flex items-center justify-between mb-1.5">
-          <span className="text-sm sm:text-base font-semibold text-gray-900 tracking-tight">
+          <span className="text-sm sm:text-base font-semibold text-[#683B92] tracking-tight">
             第 {num} 篇
           </span>
           <span

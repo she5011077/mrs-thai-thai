@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+:root {
+  --brand-purple: #683B92;
+  --brand-orange: #EB6D54;
+  --brand-purple-light: #f3eef8;
+  --brand-orange-light: #fdf0ed;
+}
+
 body {
   background: #fafaf9;
   color: #111827;
