@@ -10,6 +10,18 @@ export interface Post {
   updated_at: string;
 }
 
+export interface IgFbPost {
+  id: string;
+  post_number: number;
+  content: string;
+  images: string[];
+  link: string;
+  status: PostStatus;
+  feedback: string;
+  created_at: string;
+  updated_at: string;
+}
+
 export type PostStatus = 'pending' | 'approved' | 'revision';
 
 export const STATUS_LABELS: Record<PostStatus, string> = {

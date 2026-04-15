@@ -1,25 +1,36 @@
 'use client';
 
 import { useState } from 'react';
-import { Post } from '@/lib/types';
+import { Post, IgFbPost } from '@/lib/types';
 import PostCard from './PostCard';
 import EditModal from './EditModal';
 import DocCard from './DocCard';
+import IgFbCard from './IgFbCard';
+import IgFbEditModal from './IgFbEditModal';
 
 interface DashboardProps {
   initialPosts: Post[];
+  initialIgFbPosts: IgFbPost[];
   settings: Record<string, string>;
 }
 
-export default function Dashboard({ initialPosts, settings }: DashboardProps) {
+export default function Dashboard({ initialPosts, initialIgFbPosts, settings }: DashboardProps) {
   const [posts, setPosts] = useState<Post[]>(initialPosts);
   const [editingDay, setEditingDay] = useState<number | null>(null);
+
+  const [igFbPosts, setIgFbPosts] = useState<IgFbPost[]>(initialIgFbPosts);
+  const [editingIgFb, setEditingIgFb] = useState<number | null>(null);
 
   const postsByDay = new Map<number, Post>();
   posts.forEach((p) => postsByDay.set(p.day_number, p));
 
-  const editingPost = editingDay !== null ? postsByDay.get(editingDay) || null : null;
+  const igFbByNum = new Map<number, IgFbPost>();
+  igFbPosts.forEach((p) => igFbByNum.set(p.post_number, p));
 
+  const editingPost = editingDay !== null ? postsByDay.get(editingDay) || null : null;
+  const editingIgFbPost = editingIgFb !== null ? igFbByNum.get(editingIgFb) || null : null;
+
+  // Threads handlers
   const handleSave = async (id: string, data: Partial<Post>) => {
     const res = await fetch(`/api/posts/${id}`, {
       method: 'PUT',
@@ -51,6 +62,41 @@ export default function Dashboard({ initialPosts, settings }: DashboardProps) {
     if (res.ok) {
       setPosts((prev) => prev.filter((p) => p.id !== id));
       setEditingDay(null);
+    }
+  };
+
+  // IG/FB handlers
+  const handleIgFbSave = async (id: string, data: Partial<IgFbPost>) => {
+    const res = await fetch(`/api/ig-fb-posts/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+    if (res.ok) {
+      const updated = await res.json();
+      setIgFbPosts((prev) => prev.map((p) => (p.id === id ? updated : p)));
+      setEditingIgFb(null);
+    }
+  };
+
+  const handleIgFbCreate = async (num: number, data: Partial<IgFbPost>) => {
+    const res = await fetch('/api/ig-fb-posts', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ post_number: num, images: [], status: 'pending', feedback: '', link: '', ...data }),
+    });
+    if (res.ok) {
+      const created = await res.json();
+      setIgFbPosts((prev) => [...prev, created]);
+      setEditingIgFb(null);
+    }
+  };
+
+  const handleIgFbDelete = async (id: string) => {
+    const res = await fetch(`/api/ig-fb-posts/${id}`, { method: 'DELETE' });
+    if (res.ok) {
+      setIgFbPosts((prev) => prev.filter((p) => p.id !== id));
+      setEditingIgFb(null);
     }
   };
 
@@ -87,6 +133,31 @@ export default function Dashboard({ initialPosts, settings }: DashboardProps) {
             );
           })}
         </div>
+
+        {/* IG / FB Section */}
+        <div className="mt-12 sm:mt-16">
+          <div className="h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent mb-8 sm:mb-12" />
+          <header className="text-center mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 tracking-tight mb-1">
+              IG / FB 貼文
+            </h2>
+            <p className="text-xs sm:text-sm text-gray-400 tracking-wide">每月 6 篇 / 圖文共用</p>
+          </header>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
+            {Array.from({ length: 6 }, (_, i) => i + 1).map((num) => {
+              const post = igFbByNum.get(num);
+              return (
+                <IgFbCard
+                  key={num}
+                  num={num}
+                  post={post}
+                  onClick={() => setEditingIgFb(num)}
+                />
+              );
+            })}
+          </div>
+        </div>
       </div>
 
       {editingDay !== null && (
@@ -97,6 +168,17 @@ export default function Dashboard({ initialPosts, settings }: DashboardProps) {
           onSave={handleSave}
           onCreate={handleCreate}
           onDelete={handleDelete}
+        />
+      )}
+
+      {editingIgFb !== null && (
+        <IgFbEditModal
+          num={editingIgFb}
+          post={editingIgFbPost}
+          onClose={() => setEditingIgFb(null)}
+          onSave={handleIgFbSave}
+          onCreate={handleIgFbCreate}
+          onDelete={handleIgFbDelete}
         />
       )}
     </div>
