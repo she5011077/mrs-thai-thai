@@ -8,6 +8,7 @@ import DocCard from './DocCard';
 import IgFbCard from './IgFbCard';
 import IgFbEditModal from './IgFbEditModal';
 import ReferenceSection from './ReferenceSection';
+import PlanCard from './PlanCard';
 
 interface DashboardProps {
   initialPosts: Post[];
@@ -127,8 +128,31 @@ export default function Dashboard({ initialPosts, initialIgFbPosts, initialRefs,
             <p className="text-xs sm:text-sm text-gray-400 tracking-wide">每月 6 篇 / 圖文共用</p>
           </header>
 
-          <div className="mb-6 sm:mb-8">
-            <DocCard label="每月企劃" settingKey="ig_fb_plan_doc_url" initialUrl={settings.ig_fb_plan_doc_url || ''} />
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-6 sm:mb-8">
+            <PlanCard
+              label="第一個月企劃"
+              linkKey="ig_fb_plan_m1_link"
+              fileKey="ig_fb_plan_m1_file"
+              initialLink={settings.ig_fb_plan_m1_link || ''}
+              initialFile={settings.ig_fb_plan_m1_file || ''}
+              initialFileName={settings.ig_fb_plan_m1_file_name || ''}
+            />
+            <PlanCard
+              label="第二個月企劃"
+              linkKey="ig_fb_plan_m2_link"
+              fileKey="ig_fb_plan_m2_file"
+              initialLink={settings.ig_fb_plan_m2_link || ''}
+              initialFile={settings.ig_fb_plan_m2_file || ''}
+              initialFileName={settings.ig_fb_plan_m2_file_name || ''}
+            />
+            <PlanCard
+              label="第三個月企劃"
+              linkKey="ig_fb_plan_m3_link"
+              fileKey="ig_fb_plan_m3_file"
+              initialLink={settings.ig_fb_plan_m3_link || ''}
+              initialFile={settings.ig_fb_plan_m3_file || ''}
+              initialFileName={settings.ig_fb_plan_m3_file_name || ''}
+            />
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
