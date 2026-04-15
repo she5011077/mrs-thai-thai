@@ -1,20 +1,22 @@
 'use client';
 
 import { useState } from 'react';
-import { Post, IgFbPost } from '@/lib/types';
+import { Post, IgFbPost, Reference } from '@/lib/types';
 import PostCard from './PostCard';
 import EditModal from './EditModal';
 import DocCard from './DocCard';
 import IgFbCard from './IgFbCard';
 import IgFbEditModal from './IgFbEditModal';
+import ReferenceSection from './ReferenceSection';
 
 interface DashboardProps {
   initialPosts: Post[];
   initialIgFbPosts: IgFbPost[];
+  initialRefs: Reference[];
   settings: Record<string, string>;
 }
 
-export default function Dashboard({ initialPosts, initialIgFbPosts, settings }: DashboardProps) {
+export default function Dashboard({ initialPosts, initialIgFbPosts, initialRefs, settings }: DashboardProps) {
   const [posts, setPosts] = useState<Post[]>(initialPosts);
   const [editingDay, setEditingDay] = useState<number | null>(null);
 
@@ -157,6 +159,19 @@ export default function Dashboard({ initialPosts, initialIgFbPosts, settings }: 
               );
             })}
           </div>
+        </div>
+
+        {/* 參考資料 Section */}
+        <div className="mt-12 sm:mt-16">
+          <div className="h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent mb-8 sm:mb-12" />
+          <header className="text-center mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 tracking-tight mb-1">
+              參考資料
+            </h2>
+            <p className="text-xs sm:text-sm text-gray-400 tracking-wide">業主提供的檔案與連結</p>
+          </header>
+
+          <ReferenceSection initialRefs={initialRefs} />
         </div>
       </div>
 

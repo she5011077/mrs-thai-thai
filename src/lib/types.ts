@@ -10,6 +10,14 @@ export interface Post {
   updated_at: string;
 }
 
+export interface Reference {
+  id: string;
+  name: string;
+  type: 'link' | 'file';
+  url: string;
+  created_at: string;
+}
+
 export interface IgFbPost {
   id: string;
   post_number: number;
