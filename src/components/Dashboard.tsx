@@ -165,33 +165,6 @@ export default function Dashboard({ initialPosts, initialIgFbPosts, initialRefs,
             <p className="text-xs sm:text-sm text-gray-400 tracking-wide">每月 6 篇 / 圖文共用</p>
           </header>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-6 sm:mb-8">
-            <PlanCard
-              label="第一個月企劃"
-              linkKey="ig_fb_plan_m1_link"
-              fileKey="ig_fb_plan_m1_file"
-              initialLink={settings.ig_fb_plan_m1_link || ''}
-              initialFile={settings.ig_fb_plan_m1_file || ''}
-              initialFileName={settings.ig_fb_plan_m1_file_name || ''}
-            />
-            <PlanCard
-              label="第二個月企劃"
-              linkKey="ig_fb_plan_m2_link"
-              fileKey="ig_fb_plan_m2_file"
-              initialLink={settings.ig_fb_plan_m2_link || ''}
-              initialFile={settings.ig_fb_plan_m2_file || ''}
-              initialFileName={settings.ig_fb_plan_m2_file_name || ''}
-            />
-            <PlanCard
-              label="第三個月企劃"
-              linkKey="ig_fb_plan_m3_link"
-              fileKey="ig_fb_plan_m3_file"
-              initialLink={settings.ig_fb_plan_m3_link || ''}
-              initialFile={settings.ig_fb_plan_m3_file || ''}
-              initialFileName={settings.ig_fb_plan_m3_file_name || ''}
-            />
-          </div>
-
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
             {Array.from({ length: 6 }, (_, i) => i + 1).map((num) => {
               const post = igFbByNum.get(num);
@@ -216,11 +189,6 @@ export default function Dashboard({ initialPosts, initialIgFbPosts, initialRefs,
             </h2>
             <p className="text-xs sm:text-sm text-gray-400 tracking-wide">內容管理 / 業主審核</p>
           </header>
-
-          {/* Google Doc Link */}
-          <div className="mb-6 sm:mb-8">
-            <DocCard label="發文企劃" settingKey="plan_doc_url" initialUrl={settings.plan_doc_url || ''} />
-          </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
             {Array.from({ length: 30 }, (_, i) => i + 1).map((day) => {
