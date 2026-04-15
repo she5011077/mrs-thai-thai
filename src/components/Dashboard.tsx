@@ -103,23 +103,60 @@ export default function Dashboard({ initialPosts, initialIgFbPosts, initialRefs,
     }
   };
 
+  const scrollTo = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <div className="min-h-screen bg-[#fafaf9]">
-      <div className="h-px bg-gradient-to-r from-transparent via-[#683B92]/30 to-transparent" />
+      {/* Top bar with brand name + nav */}
+      <div className="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-[#683B92]/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-3 sm:py-0">
+            <h1 className="text-lg sm:text-xl font-bold text-[#683B92] tracking-tight text-center sm:text-left sm:py-4">
+              這味泰泰
+            </h1>
+            <nav className="flex items-center justify-center gap-1 sm:gap-2 mt-2 sm:mt-0">
+              <button
+                onClick={() => scrollTo('sec-ref')}
+                className="px-3 py-2 sm:py-4 text-xs sm:text-sm font-medium text-gray-500 hover:text-[#683B92] transition-colors"
+              >
+                參考資料
+              </button>
+              <span className="text-gray-200">|</span>
+              <button
+                onClick={() => scrollTo('sec-igfb')}
+                className="px-3 py-2 sm:py-4 text-xs sm:text-sm font-medium text-gray-500 hover:text-[#683B92] transition-colors"
+              >
+                IG / FB
+              </button>
+              <span className="text-gray-200">|</span>
+              <button
+                onClick={() => scrollTo('sec-threads')}
+                className="px-3 py-2 sm:py-4 text-xs sm:text-sm font-medium text-gray-500 hover:text-[#683B92] transition-colors"
+              >
+                Threads
+              </button>
+            </nav>
+          </div>
+        </div>
+      </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
         {/* 參考資料 Section */}
-        <header className="text-center mb-8 sm:mb-12 lg:mb-14">
-          <h1 className="text-2xl sm:text-3xl font-semibold text-[#683B92] tracking-tight mb-1">
+        <section id="sec-ref" className="scroll-mt-24">
+        <header className="text-center mb-8 sm:mb-12">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-[#683B92] tracking-tight mb-1">
             參考資料
-          </h1>
+          </h2>
           <p className="text-xs sm:text-sm text-gray-400 tracking-wide">業主提供的檔案與連結</p>
         </header>
 
         <ReferenceSection initialRefs={initialRefs} />
+        </section>
 
         {/* IG / FB Section */}
-        <div className="mt-12 sm:mt-16">
+        <section id="sec-igfb" className="scroll-mt-24 mt-12 sm:mt-16">
           <div className="h-px bg-gradient-to-r from-transparent via-[#683B92]/30 to-transparent mb-8 sm:mb-12" />
           <header className="text-center mb-8 sm:mb-12">
             <h2 className="text-2xl sm:text-3xl font-semibold text-[#683B92] tracking-tight mb-1">
@@ -168,10 +205,10 @@ export default function Dashboard({ initialPosts, initialIgFbPosts, initialRefs,
               );
             })}
           </div>
-        </div>
+        </section>
 
         {/* Threads Section */}
-        <div className="mt-12 sm:mt-16">
+        <section id="sec-threads" className="scroll-mt-24 mt-12 sm:mt-16">
           <div className="h-px bg-gradient-to-r from-transparent via-[#683B92]/30 to-transparent mb-8 sm:mb-12" />
           <header className="text-center mb-8 sm:mb-12">
             <h2 className="text-2xl sm:text-3xl font-semibold text-[#683B92] tracking-tight mb-1">
@@ -199,7 +236,7 @@ export default function Dashboard({ initialPosts, initialIgFbPosts, initialRefs,
               );
             })}
           </div>
-        </div>
+        </section>
 
       </div>
 
