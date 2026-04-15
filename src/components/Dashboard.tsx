@@ -217,9 +217,8 @@ export default function Dashboard({ initialPosts, initialIgFbPosts, initialRefs,
             <p className="text-xs sm:text-sm text-gray-400 tracking-wide">內容管理 / 業主審核</p>
           </header>
 
-          {/* Google Doc Links */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-6 sm:mb-8">
-            <DocCard label="訪談稿" settingKey="interview_doc_url" initialUrl={settings.interview_doc_url || ''} />
+          {/* Google Doc Link */}
+          <div className="mb-6 sm:mb-8">
             <DocCard label="30日發文企劃" settingKey="plan_doc_url" initialUrl={settings.plan_doc_url || ''} />
           </div>
 
