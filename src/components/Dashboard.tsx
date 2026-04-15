@@ -107,46 +107,15 @@ export default function Dashboard({ initialPosts, initialIgFbPosts, initialRefs,
       <div className="h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
-        {/* Header */}
+        {/* IG / FB Section */}
         <header className="text-center mb-8 sm:mb-12 lg:mb-14">
           <h1 className="text-2xl sm:text-3xl font-semibold text-gray-900 tracking-tight mb-1">
-            Threads 內容排程
+            IG / FB 貼文
           </h1>
-          <p className="text-xs sm:text-sm text-gray-400 tracking-wide">內容管理 / 業主審核</p>
+          <p className="text-xs sm:text-sm text-gray-400 tracking-wide">每月 6 篇 / 圖文共用</p>
         </header>
 
-        {/* Google Doc Links */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-6 sm:mb-8">
-          <DocCard label="訪談稿" settingKey="interview_doc_url" initialUrl={settings.interview_doc_url || ''} />
-          <DocCard label="30日發文企劃" settingKey="plan_doc_url" initialUrl={settings.plan_doc_url || ''} />
-        </div>
-
-        {/* 30-day Card Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
-          {Array.from({ length: 30 }, (_, i) => i + 1).map((day) => {
-            const post = postsByDay.get(day);
-            return (
-              <PostCard
-                key={day}
-                day={day}
-                post={post}
-                onClick={() => setEditingDay(day)}
-              />
-            );
-          })}
-        </div>
-
-        {/* IG / FB Section */}
-        <div className="mt-12 sm:mt-16">
-          <div className="h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent mb-8 sm:mb-12" />
-          <header className="text-center mb-8 sm:mb-12">
-            <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 tracking-tight mb-1">
-              IG / FB 貼文
-            </h2>
-            <p className="text-xs sm:text-sm text-gray-400 tracking-wide">每月 6 篇 / 圖文共用</p>
-          </header>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 mb-6 sm:mb-8">
             {Array.from({ length: 6 }, (_, i) => i + 1).map((num) => {
               const post = igFbByNum.get(num);
               return (
@@ -155,6 +124,36 @@ export default function Dashboard({ initialPosts, initialIgFbPosts, initialRefs,
                   num={num}
                   post={post}
                   onClick={() => setEditingIgFb(num)}
+                />
+              );
+            })}
+        </div>
+
+        {/* Threads Section */}
+        <div className="mt-12 sm:mt-16">
+          <div className="h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent mb-8 sm:mb-12" />
+          <header className="text-center mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 tracking-tight mb-1">
+              Threads 內容排程
+            </h2>
+            <p className="text-xs sm:text-sm text-gray-400 tracking-wide">內容管理 / 業主審核</p>
+          </header>
+
+          {/* Google Doc Links */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-6 sm:mb-8">
+            <DocCard label="訪談稿" settingKey="interview_doc_url" initialUrl={settings.interview_doc_url || ''} />
+            <DocCard label="30日發文企劃" settingKey="plan_doc_url" initialUrl={settings.plan_doc_url || ''} />
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
+            {Array.from({ length: 30 }, (_, i) => i + 1).map((day) => {
+              const post = postsByDay.get(day);
+              return (
+                <PostCard
+                  key={day}
+                  day={day}
+                  post={post}
+                  onClick={() => setEditingDay(day)}
                 />
               );
             })}
