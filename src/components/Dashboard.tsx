@@ -107,7 +107,19 @@ export default function Dashboard({ initialPosts, initialIgFbPosts, initialRefs,
       <div className="h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
+        {/* 參考資料 Section */}
+        <header className="text-center mb-8 sm:mb-12 lg:mb-14">
+          <h1 className="text-2xl sm:text-3xl font-semibold text-gray-900 tracking-tight mb-1">
+            參考資料
+          </h1>
+          <p className="text-xs sm:text-sm text-gray-400 tracking-wide">業主提供的檔案與連結</p>
+        </header>
+
+        <ReferenceSection initialRefs={initialRefs} />
+
         {/* IG / FB Section */}
+        <div className="mt-12 sm:mt-16">
+          <div className="h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent mb-8 sm:mb-12" />
         <header className="text-center mb-8 sm:mb-12 lg:mb-14">
           <h1 className="text-2xl sm:text-3xl font-semibold text-gray-900 tracking-tight mb-1">
             IG / FB 貼文
@@ -164,18 +176,6 @@ export default function Dashboard({ initialPosts, initialIgFbPosts, initialRefs,
           </div>
         </div>
 
-        {/* 參考資料 Section */}
-        <div className="mt-12 sm:mt-16">
-          <div className="h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent mb-8 sm:mb-12" />
-          <header className="text-center mb-8 sm:mb-12">
-            <h2 className="text-2xl sm:text-3xl font-semibold text-gray-900 tracking-tight mb-1">
-              參考資料
-            </h2>
-            <p className="text-xs sm:text-sm text-gray-400 tracking-wide">業主提供的檔案與連結</p>
-          </header>
-
-          <ReferenceSection initialRefs={initialRefs} />
-        </div>
       </div>
 
       {editingDay !== null && (
