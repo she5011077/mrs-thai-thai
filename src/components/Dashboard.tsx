@@ -219,7 +219,7 @@ export default function Dashboard({ initialPosts, initialIgFbPosts, initialRefs,
 
           {/* Google Doc Link */}
           <div className="mb-6 sm:mb-8">
-            <DocCard label="30日發文企劃" settingKey="plan_doc_url" initialUrl={settings.plan_doc_url || ''} />
+            <DocCard label="發文企劃" settingKey="plan_doc_url" initialUrl={settings.plan_doc_url || ''} />
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
