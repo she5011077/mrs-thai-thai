@@ -86,7 +86,7 @@ export default function Dashboard({ initialPosts, initialIgFbPosts, initialRefs,
     const res = await fetch('/api/ig-fb-posts', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ post_number: num, images: [], status: 'pending', feedback: '', link: '', ...data }),
+      body: JSON.stringify({ post_number: num, images: [], status: 'pending', feedback: '', link: '', design_note: '', ...data }),
     });
     if (res.ok) {
       const created = await res.json();

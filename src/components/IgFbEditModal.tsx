@@ -18,6 +18,7 @@ export default function IgFbEditModal({ num, post, onClose, onSave, onCreate, on
   const [link, setLink] = useState(post?.link || '');
   const [status, setStatus] = useState<PostStatus>(post?.status || 'pending');
   const [feedback, setFeedback] = useState(post?.feedback || '');
+  const [designNote, setDesignNote] = useState(post?.design_note || '');
   const [saving, setSaving] = useState(false);
   const [isEditing, setIsEditing] = useState(!post);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -48,7 +49,7 @@ export default function IgFbEditModal({ num, post, onClose, onSave, onCreate, on
   const handleSubmit = async () => {
     if (!content.trim()) return;
     setSaving(true);
-    const data = { content, images, link, status, feedback };
+    const data = { content, images, link, status, feedback, design_note: designNote };
     if (isNew) {
       await onCreate(num, data);
     } else {
@@ -214,7 +215,21 @@ export default function IgFbEditModal({ num, post, onClose, onSave, onCreate, on
             />
           </div>
 
-          {/* 4. External Link */}
+          {/* 4. Design Note */}
+          <div>
+            <label className="text-xs font-medium text-gray-400 uppercase tracking-wider mb-2 block">
+              圖片預計設計元素
+            </label>
+            <textarea
+              value={designNote}
+              onChange={(e) => setDesignNote(e.target.value)}
+              rows={3}
+              placeholder="描述圖片設計方向，例如：主視覺風格、配色、排版構想..."
+              className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm text-gray-900 focus:ring-1 focus:ring-[#683B92] focus:border-[#683B92] resize-none leading-relaxed transition-colors"
+            />
+          </div>
+
+          {/* 5. External Link */}
           <div>
             <label className="text-xs font-medium text-gray-400 uppercase tracking-wider mb-2 block">
               外部連結
@@ -230,7 +245,7 @@ export default function IgFbEditModal({ num, post, onClose, onSave, onCreate, on
 
           <div className="border-t border-gray-100" />
 
-          {/* 5. Owner Feedback */}
+          {/* 6. Owner Feedback */}
           <div>
             <label className="text-xs font-medium text-gray-400 uppercase tracking-wider mb-2 block">
               業主回饋

@@ -26,6 +26,7 @@ export interface IgFbPost {
   link: string;
   status: PostStatus;
   feedback: string;
+  design_note: string;
   created_at: string;
   updated_at: string;
 }
