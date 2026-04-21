@@ -17,7 +17,7 @@ export async function GET() {
 
 export async function POST(request: Request) {
   const body = await request.json();
-  const { post_number, content, images, status, feedback, link, design_note } = body;
+  const { post_number, month, content, images, status, feedback, link, design_note } = body;
 
   if (!content || !post_number) {
     return NextResponse.json({ error: '內容和編號為必填' }, { status: 400 });
@@ -27,6 +27,7 @@ export async function POST(request: Request) {
     .from(TABLE)
     .insert({
       post_number,
+      month: month || '',
       content,
       images: images || [],
       status: status || 'pending',

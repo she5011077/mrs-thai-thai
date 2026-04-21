@@ -10,6 +10,12 @@ import IgFbEditModal from './IgFbEditModal';
 import ReferenceSection from './ReferenceSection';
 import PlanCard from './PlanCard';
 
+const MONTHS = [
+  { key: '2026-04', label: '4 月' },
+  { key: '2026-05', label: '5 月' },
+  { key: '2026-06', label: '6 月' },
+];
+
 interface DashboardProps {
   initialPosts: Post[];
   initialIgFbPosts: IgFbPost[];
@@ -24,11 +30,17 @@ export default function Dashboard({ initialPosts, initialIgFbPosts, initialRefs,
   const [igFbPosts, setIgFbPosts] = useState<IgFbPost[]>(initialIgFbPosts);
   const [editingIgFb, setEditingIgFb] = useState<number | null>(null);
 
+  const [selectedMonth, setSelectedMonth] = useState(MONTHS[0].key);
+
+  // Filter by selected month
+  const monthPosts = posts.filter((p) => p.month === selectedMonth);
+  const monthIgFb = igFbPosts.filter((p) => p.month === selectedMonth);
+
   const postsByDay = new Map<number, Post>();
-  posts.forEach((p) => postsByDay.set(p.day_number, p));
+  monthPosts.forEach((p) => postsByDay.set(p.day_number, p));
 
   const igFbByNum = new Map<number, IgFbPost>();
-  igFbPosts.forEach((p) => igFbByNum.set(p.post_number, p));
+  monthIgFb.forEach((p) => igFbByNum.set(p.post_number, p));
 
   const editingPost = editingDay !== null ? postsByDay.get(editingDay) || null : null;
   const editingIgFbPost = editingIgFb !== null ? igFbByNum.get(editingIgFb) || null : null;
@@ -51,7 +63,7 @@ export default function Dashboard({ initialPosts, initialIgFbPosts, initialRefs,
     const res = await fetch('/api/posts', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ day_number: day, images: [], status: 'pending', feedback: '', link: '', ...data }),
+      body: JSON.stringify({ day_number: day, month: selectedMonth, images: [], status: 'pending', feedback: '', link: '', ...data }),
     });
     if (res.ok) {
       const created = await res.json();
@@ -86,7 +98,7 @@ export default function Dashboard({ initialPosts, initialIgFbPosts, initialRefs,
     const res = await fetch('/api/ig-fb-posts', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ post_number: num, images: [], status: 'pending', feedback: '', link: '', design_note: '', ...data }),
+      body: JSON.stringify({ post_number: num, month: selectedMonth, images: [], status: 'pending', feedback: '', link: '', design_note: '', ...data }),
     });
     if (res.ok) {
       const created = await res.json();
@@ -116,6 +128,24 @@ export default function Dashboard({ initialPosts, initialIgFbPosts, initialRefs,
             <h1 className="text-lg sm:text-xl font-bold text-[#683B92] tracking-tight text-center sm:text-left sm:py-4">
               這味泰泰
             </h1>
+
+            {/* Month selector */}
+            <div className="flex items-center justify-center gap-1 mt-2 sm:mt-0">
+              {MONTHS.map((m) => (
+                <button
+                  key={m.key}
+                  onClick={() => setSelectedMonth(m.key)}
+                  className={`px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all ${
+                    selectedMonth === m.key
+                      ? 'bg-[#683B92] text-white shadow-sm'
+                      : 'text-gray-400 hover:text-[#683B92] hover:bg-[#683B92]/5'
+                  }`}
+                >
+                  {m.label}
+                </button>
+              ))}
+            </div>
+
             <nav className="flex items-center justify-center gap-1 sm:gap-2 mt-2 sm:mt-0">
               <button
                 onClick={() => scrollTo('sec-ref')}
@@ -170,7 +200,7 @@ export default function Dashboard({ initialPosts, initialIgFbPosts, initialRefs,
               const post = igFbByNum.get(num);
               return (
                 <IgFbCard
-                  key={num}
+                  key={`${selectedMonth}-${num}`}
                   num={num}
                   post={post}
                   onClick={() => setEditingIgFb(num)}
@@ -187,15 +217,15 @@ export default function Dashboard({ initialPosts, initialIgFbPosts, initialRefs,
             <h2 className="text-2xl sm:text-3xl font-semibold text-[#683B92] tracking-tight mb-1">
               Threads 內容排程
             </h2>
-            <p className="text-xs sm:text-sm text-gray-400 tracking-wide">內容管理 / 業主審核</p>
+            <p className="text-xs sm:text-sm text-gray-400 tracking-wide">每月 20 篇 / 內容管理</p>
           </header>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
-            {Array.from({ length: 30 }, (_, i) => i + 1).map((day) => {
+            {Array.from({ length: 20 }, (_, i) => i + 1).map((day) => {
               const post = postsByDay.get(day);
               return (
                 <PostCard
-                  key={day}
+                  key={`${selectedMonth}-${day}`}
                   day={day}
                   post={post}
                   onClick={() => setEditingDay(day)}

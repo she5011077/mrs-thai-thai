@@ -17,7 +17,7 @@ export async function GET() {
 
 export async function POST(request: Request) {
   const body = await request.json();
-  const { day_number, content, images, status, feedback, link } = body;
+  const { day_number, month, content, images, status, feedback, link } = body;
 
   if (!content || !day_number) {
     return NextResponse.json({ error: '內容和天數為必填' }, { status: 400 });
@@ -27,6 +27,7 @@ export async function POST(request: Request) {
     .from(TABLE)
     .insert({
       day_number,
+      month: month || '',
       content,
       images: images || [],
       status: status || 'pending',

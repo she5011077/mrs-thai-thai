@@ -1,6 +1,7 @@
 export interface Post {
   id: string;
   day_number: number;
+  month: string;
   content: string;
   images: string[];
   link: string;
@@ -21,6 +22,7 @@ export interface Reference {
 export interface IgFbPost {
   id: string;
   post_number: number;
+  month: string;
   content: string;
   images: string[];
   link: string;
