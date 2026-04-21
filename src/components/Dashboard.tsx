@@ -129,13 +129,20 @@ export default function Dashboard({ initialPosts, initialIgFbPosts, initialRefs,
               這味泰泰
             </h1>
 
-            {/* Month selector */}
-            <div className="flex items-center justify-center gap-1 mt-2 sm:mt-0">
+            <nav className="flex items-center justify-center gap-1 sm:gap-2 mt-2 sm:mt-0">
+              <button
+                onClick={() => scrollTo('sec-ref')}
+                className="px-3 py-2 sm:py-4 text-xs sm:text-sm font-medium text-gray-500 hover:text-[#683B92] transition-colors"
+              >
+                參考資料
+              </button>
+              <span className="text-gray-200">|</span>
+              {/* Month selector */}
               {MONTHS.map((m) => (
                 <button
                   key={m.key}
                   onClick={() => setSelectedMonth(m.key)}
-                  className={`px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all ${
+                  className={`px-3 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all ${
                     selectedMonth === m.key
                       ? 'bg-[#683B92] text-white shadow-sm'
                       : 'text-gray-400 hover:text-[#683B92] hover:bg-[#683B92]/5'
@@ -144,15 +151,6 @@ export default function Dashboard({ initialPosts, initialIgFbPosts, initialRefs,
                   {m.label}
                 </button>
               ))}
-            </div>
-
-            <nav className="flex items-center justify-center gap-1 sm:gap-2 mt-2 sm:mt-0">
-              <button
-                onClick={() => scrollTo('sec-ref')}
-                className="px-3 py-2 sm:py-4 text-xs sm:text-sm font-medium text-gray-500 hover:text-[#683B92] transition-colors"
-              >
-                參考資料
-              </button>
               <span className="text-gray-200">|</span>
               <button
                 onClick={() => scrollTo('sec-igfb')}
