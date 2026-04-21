@@ -137,21 +137,6 @@ export default function Dashboard({ initialPosts, initialIgFbPosts, initialRefs,
                 參考資料
               </button>
               <span className="text-gray-200">|</span>
-              {/* Month selector */}
-              {MONTHS.map((m) => (
-                <button
-                  key={m.key}
-                  onClick={() => setSelectedMonth(m.key)}
-                  className={`px-3 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all ${
-                    selectedMonth === m.key
-                      ? 'bg-[#683B92] text-white shadow-sm'
-                      : 'text-gray-400 hover:text-[#683B92] hover:bg-[#683B92]/5'
-                  }`}
-                >
-                  {m.label}
-                </button>
-              ))}
-              <span className="text-gray-200">|</span>
               <button
                 onClick={() => scrollTo('sec-igfb')}
                 className="px-3 py-2 sm:py-4 text-xs sm:text-sm font-medium text-gray-500 hover:text-[#683B92] transition-colors"
@@ -183,9 +168,28 @@ export default function Dashboard({ initialPosts, initialIgFbPosts, initialRefs,
         <ReferenceSection initialRefs={initialRefs} />
         </section>
 
+        {/* Month Tabs */}
+        <div className="mt-12 sm:mt-16">
+          <div className="h-px bg-gradient-to-r from-transparent via-[#683B92]/30 to-transparent mb-8 sm:mb-10" />
+          <div className="flex items-center justify-center gap-2">
+            {MONTHS.map((m) => (
+              <button
+                key={m.key}
+                onClick={() => setSelectedMonth(m.key)}
+                className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all ${
+                  selectedMonth === m.key
+                    ? 'bg-[#683B92] text-white shadow-md'
+                    : 'bg-white text-gray-400 border border-gray-200 hover:text-[#683B92] hover:border-[#683B92]/30'
+                }`}
+              >
+                {m.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
         {/* IG / FB Section */}
-        <section id="sec-igfb" className="scroll-mt-24 mt-12 sm:mt-16">
-          <div className="h-px bg-gradient-to-r from-transparent via-[#683B92]/30 to-transparent mb-8 sm:mb-12" />
+        <section id="sec-igfb" className="scroll-mt-24 mt-8 sm:mt-10">
           <header className="text-center mb-8 sm:mb-12">
             <h2 className="text-2xl sm:text-3xl font-semibold text-[#683B92] tracking-tight mb-1">
               IG / FB 貼文
